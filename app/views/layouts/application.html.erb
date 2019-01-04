@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Inquizitive</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    
+  </head>
+
+  <body>
+    <header>
+      <%if session[:current_user_id]%>
+        <%@user = User.find(session[:current_user_id])%>
+
+        <%if @user.admin%>
+          <%=button_to "Search Question By Subject", subjects_question_path, method: :get, class: "tiny ui button btn"  %>
+          <%=button_to "Create Question", {controller: "questions", action: "new"}, method: :get, class: "tiny ui button btn" %>
+          <%=button_to "Create Post", new_post_path, method: :get, class: "tiny ui button btn" %>
+          <%=button_to "Delete Users", {controller: "users", action: "delete_user"}, method: :get, class: "tiny ui button btn"%>
+          <%=button_to "Sign Out", root_path, method: :get, class: "tiny ui button"%>
+        <%elsif @user.id != 1%>
+          <%=button_to "Search Question By Subject", subjects_question_path, method: :get, class: "medium ui button btn" %>
+          <%=button_to "Create Post", new_post_path, method: :get, class: "medium ui button btn" %>
+          <%=button_to "Sign Out", root_path, method: :get, class: "ui button"%>
+        <%end%>
+        <br>
+        <hr class="ui fitted divider">
+      <%elsif session[:guest_id]%>
+        <%=button_to "Search Question By Subject", subjects_question_path, method: :get, class: "ui button btn" %>
+        <%=button_to "Homepage", root_path, method: :get, class: "ui button"%>
+        <br>
+        <hr class="ui fitted divider">
+
+      <%end%>
+      
+    </header>
+
+    <header><%= flash[:message]%></header>
+
+    <%= yield %>
+
+  </body>
+</html>

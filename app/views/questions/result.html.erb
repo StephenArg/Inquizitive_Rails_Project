@@ -1,0 +1,14 @@
+<h1>Question Show Page</h1>
+
+<%=image_tag "#{@question.image_url}"%>
+
+<h2><%=@question.question%></h2>
+
+
+<%if @correct == 1%>
+    <%="Answer: " + @question.answer + " ✅"%>
+    <%=button_to "Next Question", "/question/questions", method: :get, params: {subject: @question.subject, topic: @question.topic} %>
+<%else%>
+    <%="Your Answer: " + @correct + " ❌"%>
+    <%=button_to "Try again", question_path, method: :get %>
+<%end%>

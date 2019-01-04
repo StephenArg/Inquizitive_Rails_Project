@@ -1,0 +1,8 @@
+<h1> Question Subjects </h1>
+
+<ul>
+<%@subjects.each do |s|%>
+<li><h2><%= link_to s, controller: "questions", action: "topics", subject: "#{s}" %></h2></li>
+<%end%>
+</ul>
+

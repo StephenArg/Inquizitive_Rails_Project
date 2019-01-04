@@ -1,0 +1,9 @@
+<h1>Subject: <%=@subject%></h1>
+<h2>Topic: <%=@topic%> </h2>
+
+<h3>Question List:</h3>
+<ul>
+    <%@questions.each do |q|%>
+    <h2><%= link_to q.question, q %></h2>
+    <%end%>
+    </ul>

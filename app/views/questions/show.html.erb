@@ -1,0 +1,19 @@
+<%=image_tag "#{@question.image_url}", class: "pic"%>
+
+<h2><%=@question.question%></h2>
+
+
+<%= form_for @question, url: "/questions/#{@question.id}/result", method: :post do |f|%>
+    <p>
+        <%=f.text_field :answer, placeholder: "Enter answer here", value: "", autofocus: true, class: "text_field"  %> <br>
+    </p>
+
+    <p>
+        <%=f.submit "Submit", correct_answer: @question.answer, class: "mini ui button" %>
+    </p>
+<%end%>
+<%if @user%>
+    <%if @user.admin%>
+        <%=button_to "Delete Question", {controller: "questions", action: "delete_question", question_id: @question.id }, method: :delete, class: "mini ui button"%>
+    <%end%>
+<%end%>

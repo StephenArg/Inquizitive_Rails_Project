@@ -1,0 +1,23 @@
+<h1>Welcome <%=@user.name%>!</h1>
+
+<h2>User Feed:</h2>
+<%@posts.each do |p|%>
+
+<ul>
+    <p>OP: <%=p.user.name%></p>
+    <p>Question: <%=link_to p[:title], p, style: 'color:#808080;' %></p>
+    <%if @user.admin%>
+        <%=button_to "Delete Post", {controller: "posts", action: "delete_post", post_id: p.id }, method: :delete, class: "mini ui secondary button btn"%>
+        <%if p.user.id == session[:current_user_id]%>
+              <%=button_to "Edit Post", edit_post_path(p), method: :get, class: "mini ui button btn"%>
+        <%end%>
+        <br>
+    <%elsif p.user.id == session[:current_user_id]%>
+        <%=button_to "Delete Post", {controller: "posts", action: "delete_post", post_id: p.id }, method: :delete, class: "mini ui secondary button btn"%>
+        <%=button_to "Edit Post", edit_post_path(p), method: :get, class: "mini ui button btn"%>
+        <br>
+    <%end%>
+    
+</ul>
+<hr class="ui divider">
+<%end%>

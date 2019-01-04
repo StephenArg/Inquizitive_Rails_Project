@@ -1,0 +1,7 @@
+<h1>Welcome to Inquizitive!</h1>
+<h2>Log in to return to a previous session, or feel free to create an account:</h2>
+
+
+<p><%=button_to "Log in", login_user_path, :method => :get %></p>
+<p><%=button_to "Create Account", new_user_path, :method => :get %></p>
+<p><%=button_to "Guest View", guest_user_path, :method => :get %></p>
